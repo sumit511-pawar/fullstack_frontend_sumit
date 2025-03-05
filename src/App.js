@@ -1,19 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function App() {
-  const [message, setMessage] = useState("");
+  const [input, setInput] = useState("");
 
-  useEffect(() => {
-    fetch("https://fullstackappsumit-production.up.railway.app/") // Replace with your actual backend URL
-      .then((response) => response.text())
-      .then((data) => setMessage(data))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("https://your-railway-backend-url.onrender.com/data", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ input }),
+    });
+    const data = await response.json();
+    alert(`Server Response: ${data.message}`);
+  };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>🚀 Fullstack App</h1>
-      <h2>{message}</h2>
+    <div className="container text-center mt-5">
+      <h1 className="text-primary">🚀 Fullstack App</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Enter something"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button type="submit" className="btn btn-primary mt-3">Send</button>
+      </form>
     </div>
   );
 }
