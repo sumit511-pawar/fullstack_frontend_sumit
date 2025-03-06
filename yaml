@@ -1,0 +1,13 @@
+✅ **Now, your frontend repo is documented well.**  
+
+---
+
+## **✅ Step 5: Keep Everything Updated**
+Whenever you make changes, **push them to GitHub**:  
+
+### **Backend:**
+```sh
+cd backend
+git add .
+git commit -m "Updated API response"
+git push origin main
